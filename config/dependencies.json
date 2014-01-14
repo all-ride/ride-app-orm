@@ -1,6 +1,11 @@
 {
     "dependencies": [
         {
+            "interfaces": "pallo\\application\\cache\\control\\CacheControl",
+            "class": "pallo\\application\\cache\\control\\OrmCacheControl",
+            "id": "orm"
+        },
+        {
             "class": "pallo\\library\\system\\file\\File",
             "id": "orm.cache.model",
             "calls": [
