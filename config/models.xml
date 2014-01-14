@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<models>
+	<model name="ModelLog" modelClass="pallo\application\orm\model\LogModel" dataClass="pallo\library\orm\model\data\LogData" group="pallo.orm">
+        <field name="dataModel" type="string">
+            <validation name="required" />
+        </field>
+        <field name="dataId" type="integer">
+            <validation name="required" />
+        </field>
+		<field name="dataVersion" type="integer" />
+		<field name="action" type="string">
+            <validation name="required" />
+        </field>
+		<field name="changes" model="ModelLogChange" relation="hasMany" />
+		<field name="user" type="string" />
+		<field name="dateAdded" type="datetime" />
+		
+		<format name="title">{dataModel} #{dataId}</format>
+		<format name="teaser">{action} {user}</format>
+		
+        <option name="group" value="orm" />
+	</model>
+    
+	<model name="ModelLogChange" modelClass="pallo\library\orm\model\LogChangeModel" dataClass="pallo\library\orm\model\data\LogChangeData" group="pallo.orm">
+        <field name="modelLog" model="ModelLog" relation="belongsTo">
+            <validation name="required" />
+        </field>
+        <field name="fieldName" type="string">
+            <validation name="required" />
+        </field>
+        <field name="oldValue" type="binary" />
+		<field name="newValue" type="binary" />
+		
+        <option name="group" value="orm" />
+	</model>    
+</models>

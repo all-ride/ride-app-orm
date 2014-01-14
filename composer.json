@@ -1,0 +1,14 @@
+{
+    "name": "pallo/app-orm",
+    "description": "ORM integration for a Pallo application.",
+    "version": "0.1.0",
+    "authors": [
+        {
+            "name": "Joris Vandeweerd",
+            "email": "joris@statik.be"
+        }
+    ],
+    "require": {
+        "pallo/app": ">=0.4.0"
+    }
+}

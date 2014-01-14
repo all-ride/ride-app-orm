@@ -1,0 +1,144 @@
+{
+    "dependencies": [
+        {
+            "class": "pallo\\library\\system\\file\\File",
+            "id": "orm.cache.model",
+            "calls": [
+                {
+                    "method": "__construct",
+                    "arguments": [
+                        {
+                            "name": "path",
+                            "type": "parameter",
+                            "properties": {
+                                "key": "orm.path.cache.model"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "interfaces": "pallo\\library\\cache\\pool\\CachePool",
+            "class": "pallo\\library\\cache\\pool\\DirectoryCachePool",
+            "id": "orm.model",
+            "calls": [
+                {
+                    "method": "__construct",
+                    "arguments": [
+                        {
+                            "name": "directory",
+                            "type": "dependency",
+                            "properties": {
+                                "interface": "pallo\\library\\system\\file\\File",
+                                "id": "orm.cache.model"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "class": "pallo\\library\\system\\file\\File",
+            "id": "orm.cache.query",
+            "calls": [
+                {
+                    "method": "__construct",
+                    "arguments": [
+                        {
+                            "name": "path",
+                            "type": "parameter",
+                            "properties": {
+                                "key": "orm.path.cache.query"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "interfaces": "pallo\\library\\cache\\pool\\CachePool",
+            "class": "pallo\\library\\cache\\pool\\DirectoryCachePool",
+            "id": "orm.query",
+            "calls": [
+                {
+                    "method": "__construct",
+                    "arguments": [
+                        {
+                            "name": "directory",
+                            "type": "dependency",
+                            "properties": {
+                                "interface": "pallo\\library\\system\\file\\File",
+                                "id": "orm.cache.query"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "interfaces": "pallo\\library\\orm\\loader\\io\\ModelIO",
+            "class": "pallo\\application\\orm\\io\\ParserModelIO",
+            "id": "json",
+            "calls": [
+                {
+                    "method": "__construct",
+                    "arguments": [
+                        {
+                            "name": "parser",
+                            "type": "dependency",
+                            "properties": {
+                                "interface": "pallo\\library\\config\\parser\\Parser",
+                                "id": "json"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "interfaces": "pallo\\library\\orm\\loader\\io\\ModelIO",
+            "class": "pallo\\application\\orm\\io\\XmlModelIO",
+            "id": "xml"
+        },
+        {
+            "interfaces": "pallo\\library\\orm\\loader\\ModelLoader",
+            "class": "pallo\\library\\orm\\loader\\ModelLoader",
+            "calls": [
+                {
+                    "method": "setModelCache",
+                    "arguments": [
+                        {
+                            "name": "modelCache",
+                            "type": "dependency",
+                            "properties": {
+                                "interface": "pallo\\library\\cache\\pool\\CachePool",
+                                "id": "orm.model"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "interfaces": "pallo\\library\\orm\\OrmManager",
+            "class": "pallo\\application\\orm\\OrmManager",
+            "calls": [
+                "setLog",
+                {
+                    "method": "setQueryCache",
+                    "arguments": [
+                        {
+                            "name": "queryCache",
+                            "type": "dependency",
+                            "properties": {
+                                "interface": "pallo\\library\\cache\\pool\\CachePool",
+                                "id": "orm.query"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
