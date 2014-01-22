@@ -1,7 +1,7 @@
 {
     "name": "pallo/app-orm",
     "description": "ORM integration for a Pallo application.",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "authors": [
         {
             "name": "Joris Vandeweerd",
@@ -10,6 +10,7 @@
     ],
     "require": {
         "pallo/app": ">=0.4.0",
+        "pallo/app-database": ">=0.1.0",
         "pallo/lib-database": ">=0.1.0",
         "pallo/lib-dependency": ">=0.5.5",
         "pallo/lib-log": ">=0.2.0",
