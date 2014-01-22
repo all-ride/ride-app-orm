@@ -37,9 +37,9 @@ class OrmCacheControl extends AbstractCacheControl {
      * @return boolean
      */
     public function isEnabled() {
-        $modelCache = $orm->getModelCache();
-        $queryCache = $orm->getQueryCache();
-        $resultCache = $orm->getResultCache();
+        $modelCache = $this->orm->getModelCache();
+        $queryCache = $this->orm->getQueryCache();
+        $resultCache = $this->orm->getResultCache();
 
         return $modelCache || $queryCache || $resultCache;
     }
