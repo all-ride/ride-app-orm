@@ -144,6 +144,21 @@
                     ]
                 }
             ]
+        },
+        {
+            "interfaces": "pallo\\library\\orm\\model\\data\\format\\modifier\\DataFormatModifier",
+            "class": "pallo\\library\\orm\\model\\data\\format\\modifier\\Nl2brDataFormatModifier",
+            "id": "nl2br"
+        },
+        {
+            "interfaces": "pallo\\library\\orm\\model\\data\\format\\modifier\\DataFormatModifier",
+            "class": "pallo\\library\\orm\\model\\data\\format\\modifier\\StripTagsDataFormatModifier",
+            "id": "striptags"
+        },
+        {
+            "interfaces": "pallo\\library\\orm\\model\\data\\format\\modifier\\DataFormatModifier",
+            "class": "pallo\\library\\orm\\model\\data\\format\\modifier\\TruncateDataFormatModifier",
+            "id": "truncate"
         }
     ]
 }
