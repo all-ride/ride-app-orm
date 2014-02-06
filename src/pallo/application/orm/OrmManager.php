@@ -8,6 +8,7 @@ use pallo\library\log\Log;
 use pallo\library\orm\loader\ModelLoader;
 use pallo\library\orm\model\data\format\DataFormatter;
 use pallo\library\orm\OrmManager as LibOrmManager;
+use pallo\library\reflection\ReflectionHelper;
 
 /**
  * Pallo integration for the ORM manager
@@ -28,13 +29,14 @@ class OrmManager extends LibOrmManager {
 
     /**
      * Constructs a new ORM manager
+     * @param pallo\library\reflection\ReflectionHelper $reflectionHelper
      * @param pallo\library\database\DatabaseManager $databaseManager
      * @param pallo\library\orm\loader\ModelLoader $modelLoader
      * @param pallo\library\dependency\DependencyInjector $dependencyInjector
      * @return null
      */
-    public function __construct(DatabaseManager $databaseManager, ModelLoader $modelLoader, DependencyInjector $dependencyInjector) {
-        parent::__construct($databaseManager, $modelLoader);
+    public function __construct(ReflectionHelper $reflectionHelper, DatabaseManager $databaseManager, ModelLoader $modelLoader, DependencyInjector $dependencyInjector) {
+        parent::__construct($reflectionHelper, $databaseManager, $modelLoader);
 
         $this->dependencyInjector = $dependencyInjector;
         $this->locales = null;
@@ -73,7 +75,7 @@ class OrmManager extends LibOrmManager {
         if (!$this->dataFormatter) {
             $modifiers = $this->dependencyInjector->getAll('pallo\\library\\orm\\model\\data\\format\\modifier\\DataFormatModifier');
 
-            $this->dataFormatter = new DataFormatter($modifiers);
+            $this->dataFormatter = new DataFormatter($this->reflectionHelper, $modifiers);
         }
 
         return $this->dataFormatter;
