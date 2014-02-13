@@ -14,7 +14,7 @@
         "pallo/lib-database": ">=0.1.0",
         "pallo/lib-dependency": ">=0.5.5",
         "pallo/lib-log": ">=0.2.0",
-        "pallo/lib-orm": ">=0.1.3",
+        "pallo/lib-orm": ">=0.1.6",
         "pallo/lib-reflection": ">=0.4.0",
         "pallo/lib-system": ">=0.3.0"
     },
