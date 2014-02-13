@@ -33,6 +33,12 @@ class XmlModelIO extends AbstractXmlModelIO {
     private $dependencyInjector;
 
     /**
+     * Instance of the validation factory
+     * @var pallo\library\validation\factory\ValidationFactory
+     */
+    private $validationFactory;
+
+    /**
      * Constructs a new model IO
      * @param pallo\library\system\file\browser\FileBrowser $fileBrowser
      * @return null
@@ -42,6 +48,7 @@ class XmlModelIO extends AbstractXmlModelIO {
 
         $this->fileBrowser = $fileBrowser;
         $this->dependencyInjector = $dependencyInjector;
+        $this->validationFactory = $dependencyInjector->get('pallo\\library\\validation\\factory\\ValidationFactory');
     }
 
     /**
@@ -68,11 +75,7 @@ class XmlModelIO extends AbstractXmlModelIO {
      * @return pallo\library\validation\validator\Validator
      */
     protected function createValidator($name, $options) {
-        return $this->dependencyInjector->get(
-            'pallo\\library\\validation\\validator\\Validator',
-            $name,
-            array('options' => $options)
-        );
+        return $this->validationFactory->createValidator($name, $options);
     }
 
     /**
