@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <models>
-	<model name="ModelLog" modelClass="pallo\application\orm\model\LogModel" dataClass="pallo\library\orm\model\data\LogData" group="pallo.orm">
+	<model name="ModelLog" modelClass="ride\application\orm\model\LogModel" dataClass="ride\library\orm\model\data\LogData" group="ride.orm">
         <field name="dataModel" type="string">
             <validation name="required" />
         </field>
@@ -21,7 +21,7 @@
         <option name="group" value="orm" />
 	</model>
     
-	<model name="ModelLogChange" modelClass="pallo\library\orm\model\LogChangeModel" dataClass="pallo\library\orm\model\data\LogChangeData" group="pallo.orm">
+	<model name="ModelLogChange" modelClass="ride\library\orm\model\LogChangeModel" dataClass="ride\library\orm\model\data\LogChangeData" group="ride.orm">
         <field name="modelLog" model="ModelLog" relation="belongsTo">
             <validation name="required" />
         </field>

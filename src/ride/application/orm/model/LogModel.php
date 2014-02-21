@@ -1,8 +1,8 @@
 <?php
 
-namespace pallo\application\orm\model;
+namespace ride\application\orm\model;
 
-use pallo\library\orm\model\LogModel as LibLogModel;
+use ride\library\orm\model\LogModel as LibLogModel;
 
 /**
  * Model for logging model actions
@@ -15,7 +15,7 @@ class LogModel extends LibLogModel {
      */
     protected function getUser() {
         $dependencyInjector = $this->orm->getDependencyInjector();
-        $securityManager = $dependencyInjector->get('pallo\\library\\security\\SecurityManager');
+        $securityManager = $dependencyInjector->get('ride\\library\\security\\SecurityManager');
 
         $user = $securityManager->getUser();
         if ($user) {

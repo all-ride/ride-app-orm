@@ -1,6 +1,6 @@
 {
-    "name": "pallo/app-orm",
-    "description": "ORM integration for a Pallo application.",
+    "name": "ride/app-orm",
+    "description": "ORM integration for a Ride application.",
     "version": "0.1.4",
     "authors": [
         {
@@ -9,19 +9,19 @@
         }
     ],
     "require": {
-        "pallo/app": ">=0.4.0",
-        "pallo/app-database": ">=0.1.0",
-        "pallo/lib-database": ">=0.1.0",
-        "pallo/lib-dependency": ">=0.5.5",
-        "pallo/lib-log": ">=0.2.0",
-        "pallo/lib-orm": ">=0.1.6",
-        "pallo/lib-reflection": ">=0.4.0",
-        "pallo/lib-system": ">=0.3.0"
+        "ride/app": ">=0.4.0",
+        "ride/app-database": ">=0.1.0",
+        "ride/lib-database": ">=0.1.0",
+        "ride/lib-dependency": ">=0.5.5",
+        "ride/lib-log": ">=0.2.0",
+        "ride/lib-orm": ">=0.1.6",
+        "ride/lib-reflection": ">=0.4.0",
+        "ride/lib-system": ">=0.3.0"
     },
     "autoload": {
         "psr-0": {
-            "pallo\\application\\cache\\control\\": ["src/"],
-            "pallo\\application\\orm\\": ["src/"]
+            "ride\\application\\cache\\control\\": ["src/"],
+            "ride\\application\\orm\\": ["src/"]
         }
     }
 }
