@@ -1,10 +1,10 @@
 <?php
 
-namespace pallo\application\cache\control;
+namespace ride\application\cache\control;
 
-use pallo\application\cache\control\AbstractCacheControl;
+use ride\application\cache\control\AbstractCacheControl;
 
-use pallo\library\orm\OrmManager;
+use ride\library\orm\OrmManager;
 
 /**
  * Cache control implementation for the ORM
@@ -19,13 +19,13 @@ class OrmCacheControl extends AbstractCacheControl {
 
     /**
      * Instance of the ORM manager
-     * @var pallo\library\orm\OrmManager
+     * @var ride\library\orm\OrmManager
      */
     private $orm;
 
     /**
      * Constructs a new ORM cache control
-     * @param pallo\library\orm\OrmManager $orm
+     * @param ride\library\orm\OrmManager $orm
      * @return null
      */
     public function __construct(OrmManager $orm) {

@@ -1,24 +1,24 @@
 <?php
 
-namespace pallo\application\orm;
+namespace ride\application\orm;
 
-use pallo\library\database\DatabaseManager;
-use pallo\library\dependency\DependencyInjector;
-use pallo\library\log\Log;
-use pallo\library\orm\loader\ModelLoader;
-use pallo\library\orm\model\data\format\DataFormatter;
-use pallo\library\orm\OrmManager as LibOrmManager;
-use pallo\library\reflection\ReflectionHelper;
-use pallo\library\validation\factory\ValidationFactory;
+use ride\library\database\DatabaseManager;
+use ride\library\dependency\DependencyInjector;
+use ride\library\log\Log;
+use ride\library\orm\loader\ModelLoader;
+use ride\library\orm\model\data\format\DataFormatter;
+use ride\library\orm\OrmManager as LibOrmManager;
+use ride\library\reflection\ReflectionHelper;
+use ride\library\validation\factory\ValidationFactory;
 
 /**
- * Pallo integration for the ORM manager
+ * Ride integration for the ORM manager
  */
 class OrmManager extends LibOrmManager {
 
     /**
      * Instance of Zibo
-     * @var pallo\library\dependency\DependencyInjector
+     * @var ride\library\dependency\DependencyInjector
      */
     protected $dependencyInjector;
 
@@ -30,10 +30,10 @@ class OrmManager extends LibOrmManager {
 
     /**
      * Constructs a new ORM manager
-     * @param pallo\library\reflection\ReflectionHelper $reflectionHelper
-     * @param pallo\library\database\DatabaseManager $databaseManager
-     * @param pallo\library\orm\loader\ModelLoader $modelLoader
-     * @param pallo\library\dependency\DependencyInjector $dependencyInjector
+     * @param ride\library\reflection\ReflectionHelper $reflectionHelper
+     * @param ride\library\database\DatabaseManager $databaseManager
+     * @param ride\library\orm\loader\ModelLoader $modelLoader
+     * @param ride\library\dependency\DependencyInjector $dependencyInjector
      * @return null
      */
     public function __construct(ReflectionHelper $reflectionHelper, DatabaseManager $databaseManager, ModelLoader $modelLoader, ValidationFactory $validationFactory, DependencyInjector $dependencyInjector) {
@@ -45,7 +45,7 @@ class OrmManager extends LibOrmManager {
 
     /**
      * Gets the dependency injector
-     * @return pallo\library\dependency\DependencyInjector
+     * @return ride\library\dependency\DependencyInjector
      */
     public function getDependencyInjector() {
         return $this->dependencyInjector;
@@ -53,7 +53,7 @@ class OrmManager extends LibOrmManager {
 
     /**
      * Sets the instance of the log
-     * @param pallo\library\log\Log $log
+     * @param ride\library\log\Log $log
      * @return null
      */
     public function setLog(Log $log) {
@@ -62,7 +62,7 @@ class OrmManager extends LibOrmManager {
 
     /**
      * Gets the instance of the log
-     * @return pallo\library\log\Log|null
+     * @return ride\library\log\Log|null
      */
     public function getLog() {
         return $this->log;
@@ -70,11 +70,11 @@ class OrmManager extends LibOrmManager {
 
     /**
      * Gets the instance of the data formatter
-     * @return \pallo\library\orm\DataFormatter
+     * @return \ride\library\orm\DataFormatter
      */
     public function getDataFormatter() {
         if (!$this->dataFormatter) {
-            $modifiers = $this->dependencyInjector->getAll('pallo\\library\\orm\\model\\data\\format\\modifier\\DataFormatModifier');
+            $modifiers = $this->dependencyInjector->getAll('ride\\library\\orm\\model\\data\\format\\modifier\\DataFormatModifier');
 
             $this->dataFormatter = new DataFormatter($this->reflectionHelper, $modifiers);
         }
@@ -91,7 +91,7 @@ class OrmManager extends LibOrmManager {
             return $this->locales;
         }
 
-        $i18n = $this->dependencyInjector->get('pallo\\library\\i18n\\I18n');
+        $i18n = $this->dependencyInjector->get('ride\\library\\i18n\\I18n');
 
         $this->locales = $i18n->getLocaleCodeList();
 
@@ -103,7 +103,7 @@ class OrmManager extends LibOrmManager {
      * @return string Code of the locale
      */
     public function getLocale() {
-        $i18n = $this->dependencyInjector->get('pallo\\library\\i18n\\I18n');
+        $i18n = $this->dependencyInjector->get('ride\\library\\i18n\\I18n');
 
         return $i18n->getLocale()->getCode();
     }

@@ -79,15 +79,15 @@ You can add these validators to any field in order to validate on your model lev
 
 ### Behaviours
 
-You can add extra behaviour to your models through the [pallo\library\orm\model\behaviour\Behaviour](/api/class/pallo/library/orm/model/behaviour/Behaviour) interface.
+You can add extra behaviour to your models through the [ride\library\orm\model\behaviour\Behaviour](/api/class/ride/library/orm/model/behaviour/Behaviour) interface.
 Check the implementations of the library for an example on how to create your own.
 
 To hook your behaviour in your model, check the following example:
 
     namespace vendor\app\model;
 
-    use pallo\library\orm\model\behaviour\DatedBehaviour;
-    use pallo\library\orm\model\GenericModel;
+    use ride\library\orm\model\behaviour\DatedBehaviour;
+    use ride\library\orm\model\GenericModel;
 
     class RegistrationModel extends GenericModel {
     
@@ -99,7 +99,7 @@ To hook your behaviour in your model, check the following example:
     
 #### Dated Behaviour
 
-The [pallo\library\orm\model\behaviour\DatedBehaviour](/api/class/pallo/library/orm/model/behaviour/DatedBehaviour) implementation will maintain the _dateAdded_ and _dateModified_ fields of your data with the time of the insert or update action.
+The [ride\library\orm\model\behaviour\DatedBehaviour](/api/class/ride/library/orm/model/behaviour/DatedBehaviour) implementation will maintain the _dateAdded_ and _dateModified_ fields of your data with the time of the insert or update action.
 
 To use this behaviour, you have to:
 
@@ -108,16 +108,16 @@ To use this behaviour, you have to:
 
 #### Log Behaviour
 
-The [pallo\library\orm\model\behaviour\LogBehaviour](/api/class/pallo/library/orm/model/behaviour/LogBehaviour) implementation will keep a log of all insert, update and delete actions.
+The [ride\library\orm\model\behaviour\LogBehaviour](/api/class/ride/library/orm/model/behaviour/LogBehaviour) implementation will keep a log of all insert, update and delete actions.
 
 You can query the history and obtain data in a certain version or from a certain date through the _ModelLog_ model.
-Check the [pallo\library\orm\model\LogModel](/api/class/pallo/library/orm/model/LogModel) API for the available methods.  
+Check the [ride\library\orm\model\LogModel](/api/class/ride/library/orm/model/LogModel) API for the available methods.  
 
 This behaviour is automatically enabled if your model is set to be logged.
 
 #### Slug Behaviour
 
-The [pallo\library\orm\model\behaviour\FieldSlugBehaviour](/api/class/pallo/library/orm/model/behaviour/FieldSlugBehaviour) and the [pallo\library\orm\model\behaviour\MethodSlugBehaviour](/api/class/pallo/library/orm/model/behaviour/MethodSlugBehaviour) implementation will maintain a _slug_ property field based on some fields or a method of your data container.
+The [ride\library\orm\model\behaviour\FieldSlugBehaviour](/api/class/ride/library/orm/model/behaviour/FieldSlugBehaviour) and the [ride\library\orm\model\behaviour\MethodSlugBehaviour](/api/class/ride/library/orm/model/behaviour/MethodSlugBehaviour) implementation will maintain a _slug_ property field based on some fields or a method of your data container.
 
 Slugs are human friendly ids for your data and are mostly used to generate user friendly URLs.
 
@@ -128,14 +128,14 @@ To use this behaviour, you have to:
 
 #### Unique Behaviour
 
-The [pallo\library\orm\model\behaviour\UniqueBehaviour](/api/class/pallo/library/orm/model/behaviour/UniqueBehaviour) implementation will force a unique value for a field in your model.
+The [ride\library\orm\model\behaviour\UniqueBehaviour](/api/class/ride/library/orm/model/behaviour/UniqueBehaviour) implementation will force a unique value for a field in your model.
 
 To use this behaviour, you have to add the behaviour in your _initialize_ method of your model:
 
     namespace vendor\app\model;
 
-    use pallo\library\orm\model\behaviour\DatedBehaviour;
-    use pallo\library\orm\model\GenericModel;
+    use ride\library\orm\model\behaviour\DatedBehaviour;
+    use ride\library\orm\model\GenericModel;
 
     class RegistrationModel extends GenericModel {
     
@@ -149,11 +149,11 @@ To use this behaviour, you have to add the behaviour in your _initialize_ method
     }
     
 In this example, the email addresses of registrations have to be unique for each type. 
-When the email address already exists for the type of the data, a [pallo\library\validation\exception\ValidationException](/api/class/pallo/library/validation/exception/ValidationException) is thrown with the _error.validation.registration.email.unique_ validation error for the _email_ field.
+When the email address already exists for the type of the data, a [ride\library\validation\exception\ValidationException](/api/class/ride/library/validation/exception/ValidationException) is thrown with the _error.validation.registration.email.unique_ validation error for the _email_ field.
 
 #### Version Behaviour
 
-The [pallo\library\orm\model\behaviour\VersionBehaviour](/api/class/pallo/library/orm/model/behaviour/VersionBehaviour) implementation will increase the version of your data on every save action.
+The [ride\library\orm\model\behaviour\VersionBehaviour](/api/class/ride/library/orm/model/behaviour/VersionBehaviour) implementation will increase the version of your data on every save action.
 
 To use this behaviour, you have to:
 
@@ -177,7 +177,7 @@ A date for your data
 
 To format your data, check this sample:
 
-    $orm = $pallo->getDependency('pallo\\library\\orm\\OrmManager');
+    $orm = $ride->getDependency('ride\\library\\orm\\OrmManager');
 
     $model = $orm->getModel('Blog');
     $post = $model->findById(3);
@@ -253,8 +253,8 @@ The following is a reference for _models.xml_ and the available elements.
 * __attributes__:
     * __name__: Name of the model (required)
     * __group__: Group name for your model (optional)
-    * __modelClass__: Full class name for your model, defaults to [pallo\library\orm\model\GenericModel](/api/class/pallo/library/orm/model/GenericModel)
-    * __dataClass__: Full class name for your data, defaults to [pallo\library\orm\model\data\Data](/api/class/pallo/library/orm/model/data/Data)
+    * __modelClass__: Full class name for your model, defaults to [ride\library\orm\model\GenericModel](/api/class/ride/library/orm/model/GenericModel)
+    * __dataClass__: Full class name for your data, defaults to [ride\library\orm\model\data\Data](/api/class/ride/library/orm/model/data/Data)
     * __log__: A boolean to state if all actions on this model should be logged, defaults to false
 * __value__: -
 * __parent__: models
@@ -400,7 +400,7 @@ You can delete multiple posts at once:
 
 You first create a query:
 
-    $orm = $pallo->getDependency('pallo\\library\\orm\\OrmManager');
+    $orm = $ride->getDependency('ride\\library\\orm\\OrmManager');
 
     // query the Registration model    
     $query = $orm->createQuery('Registration');

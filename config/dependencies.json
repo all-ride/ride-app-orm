@@ -1,12 +1,12 @@
 {
     "dependencies": [
         {
-            "interfaces": "pallo\\application\\cache\\control\\CacheControl",
-            "class": "pallo\\application\\cache\\control\\OrmCacheControl",
+            "interfaces": "ride\\application\\cache\\control\\CacheControl",
+            "class": "ride\\application\\cache\\control\\OrmCacheControl",
             "id": "orm"
         },
         {
-            "class": "pallo\\library\\system\\file\\File",
+            "class": "ride\\library\\system\\file\\File",
             "id": "orm.cache.model",
             "calls": [
                 {
@@ -24,8 +24,8 @@
             ]
         },
         {
-            "interfaces": "pallo\\library\\cache\\pool\\CachePool",
-            "class": "pallo\\library\\cache\\pool\\DirectoryCachePool",
+            "interfaces": "ride\\library\\cache\\pool\\CachePool",
+            "class": "ride\\library\\cache\\pool\\DirectoryCachePool",
             "id": "orm.model",
             "calls": [
                 {
@@ -35,7 +35,7 @@
                             "name": "directory",
                             "type": "dependency",
                             "properties": {
-                                "interface": "pallo\\library\\system\\file\\File",
+                                "interface": "ride\\library\\system\\file\\File",
                                 "id": "orm.cache.model"
                             }
                         }
@@ -44,7 +44,7 @@
             ]
         },
         {
-            "class": "pallo\\library\\system\\file\\File",
+            "class": "ride\\library\\system\\file\\File",
             "id": "orm.cache.query",
             "calls": [
                 {
@@ -62,8 +62,8 @@
             ]
         },
         {
-            "interfaces": "pallo\\library\\cache\\pool\\CachePool",
-            "class": "pallo\\library\\cache\\pool\\DirectoryCachePool",
+            "interfaces": "ride\\library\\cache\\pool\\CachePool",
+            "class": "ride\\library\\cache\\pool\\DirectoryCachePool",
             "id": "orm.query",
             "calls": [
                 {
@@ -73,7 +73,7 @@
                             "name": "directory",
                             "type": "dependency",
                             "properties": {
-                                "interface": "pallo\\library\\system\\file\\File",
+                                "interface": "ride\\library\\system\\file\\File",
                                 "id": "orm.cache.query"
                             }
                         }
@@ -82,8 +82,8 @@
             ]
         },
         {
-            "interfaces": "pallo\\library\\orm\\loader\\io\\ModelIO",
-            "class": "pallo\\application\\orm\\io\\ParserModelIO",
+            "interfaces": "ride\\library\\orm\\loader\\io\\ModelIO",
+            "class": "ride\\application\\orm\\io\\ParserModelIO",
             "id": "json",
             "calls": [
                 {
@@ -93,7 +93,7 @@
                             "name": "parser",
                             "type": "dependency",
                             "properties": {
-                                "interface": "pallo\\library\\config\\parser\\Parser",
+                                "interface": "ride\\library\\config\\parser\\Parser",
                                 "id": "json"
                             }
                         }
@@ -102,13 +102,13 @@
             ]
         },
         {
-            "interfaces": "pallo\\library\\orm\\loader\\io\\ModelIO",
-            "class": "pallo\\application\\orm\\io\\XmlModelIO",
+            "interfaces": "ride\\library\\orm\\loader\\io\\ModelIO",
+            "class": "ride\\application\\orm\\io\\XmlModelIO",
             "id": "xml"
         },
         {
-            "interfaces": "pallo\\library\\orm\\loader\\ModelLoader",
-            "class": "pallo\\library\\orm\\loader\\ModelLoader",
+            "interfaces": "ride\\library\\orm\\loader\\ModelLoader",
+            "class": "ride\\library\\orm\\loader\\ModelLoader",
             "calls": [
                 {
                     "method": "setModelCache",
@@ -117,7 +117,7 @@
                             "name": "modelCache",
                             "type": "dependency",
                             "properties": {
-                                "interface": "pallo\\library\\cache\\pool\\CachePool",
+                                "interface": "ride\\library\\cache\\pool\\CachePool",
                                 "id": "orm.model"
                             }
                         }
@@ -126,8 +126,8 @@
             ]
         },
         {
-            "interfaces": "pallo\\library\\orm\\OrmManager",
-            "class": "pallo\\application\\orm\\OrmManager",
+            "interfaces": "ride\\library\\orm\\OrmManager",
+            "class": "ride\\application\\orm\\OrmManager",
             "calls": [
                 "setLog",
                 {
@@ -137,7 +137,7 @@
                             "name": "queryCache",
                             "type": "dependency",
                             "properties": {
-                                "interface": "pallo\\library\\cache\\pool\\CachePool",
+                                "interface": "ride\\library\\cache\\pool\\CachePool",
                                 "id": "orm.query"
                             }
                         }
@@ -146,18 +146,18 @@
             ]
         },
         {
-            "interfaces": "pallo\\library\\orm\\model\\data\\format\\modifier\\DataFormatModifier",
-            "class": "pallo\\library\\orm\\model\\data\\format\\modifier\\Nl2brDataFormatModifier",
+            "interfaces": "ride\\library\\orm\\model\\data\\format\\modifier\\DataFormatModifier",
+            "class": "ride\\library\\orm\\model\\data\\format\\modifier\\Nl2brDataFormatModifier",
             "id": "nl2br"
         },
         {
-            "interfaces": "pallo\\library\\orm\\model\\data\\format\\modifier\\DataFormatModifier",
-            "class": "pallo\\library\\orm\\model\\data\\format\\modifier\\StripTagsDataFormatModifier",
+            "interfaces": "ride\\library\\orm\\model\\data\\format\\modifier\\DataFormatModifier",
+            "class": "ride\\library\\orm\\model\\data\\format\\modifier\\StripTagsDataFormatModifier",
             "id": "striptags"
         },
         {
-            "interfaces": "pallo\\library\\orm\\model\\data\\format\\modifier\\DataFormatModifier",
-            "class": "pallo\\library\\orm\\model\\data\\format\\modifier\\TruncateDataFormatModifier",
+            "interfaces": "ride\\library\\orm\\model\\data\\format\\modifier\\DataFormatModifier",
+            "class": "ride\\library\\orm\\model\\data\\format\\modifier\\TruncateDataFormatModifier",
             "id": "truncate"
         }
     ]
