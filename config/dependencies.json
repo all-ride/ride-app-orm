@@ -159,6 +159,11 @@
             "interfaces": "ride\\library\\orm\\model\\data\\format\\modifier\\DataFormatModifier",
             "class": "ride\\library\\orm\\model\\data\\format\\modifier\\TruncateDataFormatModifier",
             "id": "truncate"
+        },
+        {
+            "interfaces": "ride\\library\\orm\\model\\data\\format\\modifier\\DataFormatModifier",
+            "class": "ride\\library\\orm\\model\\data\\format\\modifier\\DateDataFormatModifier",
+            "id": "date"
         }
     ]
 }

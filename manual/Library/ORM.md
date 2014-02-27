@@ -252,10 +252,8 @@ The following is a reference for _models.xml_ and the available elements.
 
 * __attributes__:
     * __name__: Name of the model (required)
-    * __group__: Group name for your model (optional)
     * __modelClass__: Full class name for your model, defaults to [ride\library\orm\model\GenericModel](/api/class/ride/library/orm/model/GenericModel)
     * __dataClass__: Full class name for your data, defaults to [ride\library\orm\model\data\Data](/api/class/ride/library/orm/model/data/Data)
-    * __log__: A boolean to state if all actions on this model should be logged, defaults to false
 * __value__: -
 * __parent__: models
 * __children__: field, index, format, option
@@ -276,7 +274,7 @@ The following is a reference for _models.xml_ and the available elements.
     * __relationOrder__: Order expression for the relation. (only for hasMany relations)
 * __value__: -
 * __parent__: model
-* __children__: validation
+* __children__: validation, option
 
 ##### validation
 
@@ -325,7 +323,7 @@ The following is a reference for _models.xml_ and the available elements.
     * __name__: The name of the option (required)
     * __value__: The value of the option (required)
 * __value__: -
-* __parent__: model
+* __parent__: model, field
 * __children__: _none_
 
 ## Models
