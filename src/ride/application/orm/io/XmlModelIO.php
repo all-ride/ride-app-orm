@@ -6,7 +6,6 @@ use ride\library\dependency\DependencyInjector;
 use ride\library\orm\loader\io\AbstractXmlModelIO;
 use ride\library\reflection\ReflectionHelper;
 use ride\library\system\file\browser\FileBrowser;
-use ride\library\system\file\File;
 
 /**
  * Read and write model definitions from and to an xml structure in the Zibo
@@ -22,25 +21,25 @@ class XmlModelIO extends AbstractXmlModelIO {
 
     /**
      * Instance of the file browser
-     * @var ride\library\system\file\browser\FileBrowser
+     * @var \ride\library\system\file\browser\FileBrowser
      */
     private $fileBrowser;
 
     /**
      * Instance of the dependency injector
-     * @var ride\library\dependency\DependencyInjector
+     * @var \ride\library\dependency\DependencyInjector
      */
     private $dependencyInjector;
 
     /**
      * Instance of the validation factory
-     * @var ride\library\validation\factory\ValidationFactory
+     * @var \ride\library\validation\factory\ValidationFactory
      */
     private $validationFactory;
 
     /**
      * Constructs a new model IO
-     * @param ride\library\system\file\browser\FileBrowser $fileBrowser
+     * @param \ride\library\system\file\browser\FileBrowser $fileBrowser
      * @return null
      */
     public function __construct(ReflectionHelper $reflectionHelper, FileBrowser $fileBrowser, DependencyInjector $dependencyInjector) {
@@ -72,7 +71,7 @@ class XmlModelIO extends AbstractXmlModelIO {
      * Creates an instance of a validator
      * @param string $name Name of the validator
      * @param array $options Options for the validator
-     * @return ride\library\validation\validator\Validator
+     * @return \ride\library\validation\validator\Validator
      */
     protected function createValidator($name, $options) {
         return $this->validationFactory->createValidator($name, $options);
