@@ -2,8 +2,6 @@
 
 namespace ride\application\cache\control;
 
-use ride\application\cache\control\AbstractCacheControl;
-
 use ride\library\orm\OrmManager;
 
 /**
@@ -19,13 +17,13 @@ class OrmCacheControl extends AbstractCacheControl {
 
     /**
      * Instance of the ORM manager
-     * @var ride\library\orm\OrmManager
+     * @var \ride\library\orm\OrmManager
      */
     private $orm;
 
     /**
      * Constructs a new ORM cache control
-     * @param ride\library\orm\OrmManager $orm
+     * @param \ride\library\orm\OrmManager $orm
      * @return null
      */
     public function __construct(OrmManager $orm) {

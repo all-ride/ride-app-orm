@@ -18,7 +18,7 @@ class OrmManager extends LibOrmManager {
 
     /**
      * Instance of Zibo
-     * @var ride\library\dependency\DependencyInjector
+     * @var \ride\library\dependency\DependencyInjector
      */
     protected $dependencyInjector;
 
@@ -30,9 +30,11 @@ class OrmManager extends LibOrmManager {
 
     /**
      * Constructs a new ORM manager
-     * @param ride\library\database\DatabaseManager $databaseManager
-     * @param ride\library\orm\loader\ModelLoader $modelLoader
-     * @param ride\library\dependency\DependencyInjector $dependencyInjector
+     * @param \ride\library\database\DatabaseManager $databaseManager
+     * @param \ride\library\orm\loader\ModelLoader $modelLoader
+     * @param \ride\library\validation\factory\ValidationFactory $validationFactory
+     * @param \ride\library\dependency\DependencyInjector $dependencyInjector
+     * @param string $defaultNamespace
      * @return null
      */
     public function __construct(DatabaseManager $databaseManager, ModelLoader $modelLoader, ValidationFactory $validationFactory, DependencyInjector $dependencyInjector, $defaultNamespace) {
@@ -45,7 +47,7 @@ class OrmManager extends LibOrmManager {
 
     /**
      * Gets the dependency injector
-     * @return ride\library\dependency\DependencyInjector
+     * @return \ride\library\dependency\DependencyInjector
      */
     public function getDependencyInjector() {
         return $this->dependencyInjector;
@@ -53,7 +55,7 @@ class OrmManager extends LibOrmManager {
 
     /**
      * Sets the instance of the log
-     * @param ride\library\log\Log $log
+     * @param \ride\library\log\Log $log
      * @return null
      */
     public function setLog(Log $log) {
@@ -62,7 +64,7 @@ class OrmManager extends LibOrmManager {
 
     /**
      * Gets the instance of the log
-     * @return ride\library\log\Log|null
+     * @return \ride\library\log\Log|null
      */
     public function getLog() {
         return $this->log;
