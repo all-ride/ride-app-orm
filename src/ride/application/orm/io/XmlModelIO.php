@@ -43,12 +43,13 @@ class XmlModelIO extends AbstractXmlModelIO {
      * @param ride\library\system\file\browser\FileBrowser $fileBrowser
      * @return null
      */
-    public function __construct(ReflectionHelper $reflectionHelper, FileBrowser $fileBrowser, DependencyInjector $dependencyInjector) {
+    public function __construct(ReflectionHelper $reflectionHelper, FileBrowser $fileBrowser, DependencyInjector $dependencyInjector, $defaultNamespace) {
         parent::__construct($reflectionHelper);
 
         $this->fileBrowser = $fileBrowser;
         $this->dependencyInjector = $dependencyInjector;
         $this->validationFactory = $dependencyInjector->get('ride\\library\\validation\\factory\\ValidationFactory');
+        $this->defaultNamespace = $defaultNamespace;
     }
 
     /**
@@ -66,6 +67,24 @@ class XmlModelIO extends AbstractXmlModelIO {
         }
 
         return $models;
+    }
+
+    /**
+     * Gets the default entry class name for the provided model
+     * @param string $modelName
+     * @return string
+     */
+    protected function getEntryClassName($modelName) {
+        return $this->defaultNamespace . '\\' . $modelName . 'Entry';
+    }
+
+    /**
+     * Gets the default entry proxy class name for the provided model
+     * @param string $modelName
+     * @return string
+     */
+    protected function getProxyClassName($modelName) {
+        return $this->defaultNamespace . '\\proxy\\' . $modelName . 'EntryProxy';
     }
 
     /**

@@ -104,7 +104,21 @@
         {
             "interfaces": "ride\\library\\orm\\loader\\io\\ModelIO",
             "class": "ride\\application\\orm\\io\\XmlModelIO",
-            "id": "xml"
+            "id": "xml",
+            "calls": [
+                {
+                    "method": "__construct",
+                    "arguments": [
+                        {
+                            "name": "defaultNamespace",
+                            "type": "parameter",
+                            "properties": {
+                                "key": "orm.namespace.entry"
+                            }
+                        }
+                    ]
+                }
+            ]
         },
         {
             "interfaces": "ride\\library\\orm\\loader\\ModelLoader",
@@ -128,7 +142,20 @@
         {
             "interfaces": "ride\\library\\orm\\OrmManager",
             "class": "ride\\application\\orm\\OrmManager",
+
             "calls": [
+                {
+                    "method": "__construct",
+                    "arguments": [
+                        {
+                            "name": "defaultNamespace",
+                            "type": "parameter",
+                            "properties": {
+                                "key": "orm.namespace.entry"
+                            }
+                        }
+                    ]
+                },
                 "setLog",
                 {
                     "method": "setQueryCache",
@@ -146,24 +173,73 @@
             ]
         },
         {
-            "interfaces": "ride\\library\\orm\\model\\data\\format\\modifier\\DataFormatModifier",
-            "class": "ride\\library\\orm\\model\\data\\format\\modifier\\Nl2brDataFormatModifier",
+            "interfaces": "ride\\library\\orm\\entry\\format\\EntryFormatter",
+            "class": "ride\\library\\orm\\entry\\format\\GenericEntryFormatter",
+            "id": "generic",
+            "calls": [
+                {
+                    "method": "__construct",
+                    "arguments": [
+                        {
+                            "name": "modifiers",
+                            "type": "dependencies",
+                            "properties": {
+                                "interface": "ride\\library\\orm\\entry\\format\\modifier\\EntryFormatModifier"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "interfaces": "ride\\library\\orm\\entry\\format\\modifier\\EntryFormatModifier",
+            "class": "ride\\library\\orm\\entry\\format\\modifier\\CapitalizeEntryFormatModifier",
+            "id": "capitalize"
+        },
+        {
+            "interfaces": "ride\\library\\orm\\entry\\format\\modifier\\EntryFormatModifier",
+            "class": "ride\\library\\orm\\entry\\format\\modifier\\DateEntryFormatModifier",
+            "id": "date"
+        },
+        {
+            "interfaces": "ride\\library\\orm\\entry\\format\\modifier\\EntryFormatModifier",
+            "class": "ride\\library\\orm\\entry\\format\\modifier\\HtmlEntitiesEntryFormatModifier",
+            "id": "htmlentities"
+        },
+        {
+            "interfaces": "ride\\library\\orm\\entry\\format\\modifier\\EntryFormatModifier",
+            "class": "ride\\library\\orm\\entry\\format\\modifier\\Nl2brEntryFormatModifier",
             "id": "nl2br"
         },
         {
-            "interfaces": "ride\\library\\orm\\model\\data\\format\\modifier\\DataFormatModifier",
-            "class": "ride\\library\\orm\\model\\data\\format\\modifier\\StripTagsDataFormatModifier",
+            "interfaces": "ride\\library\\orm\\entry\\format\\modifier\\EntryFormatModifier",
+            "class": "ride\\library\\orm\\entry\\format\\modifier\\StripTagsEntryFormatModifier",
             "id": "striptags"
         },
         {
-            "interfaces": "ride\\library\\orm\\model\\data\\format\\modifier\\DataFormatModifier",
-            "class": "ride\\library\\orm\\model\\data\\format\\modifier\\TruncateDataFormatModifier",
+            "interfaces": "ride\\library\\orm\\entry\\format\\modifier\\EntryFormatModifier",
+            "class": "ride\\library\\orm\\entry\\format\\modifier\\TruncateEntryFormatModifier",
             "id": "truncate"
         },
         {
-            "interfaces": "ride\\library\\orm\\model\\data\\format\\modifier\\DataFormatModifier",
-            "class": "ride\\library\\orm\\model\\data\\format\\modifier\\DateDataFormatModifier",
-            "id": "date"
+            "interfaces": "ride\\library\\generator\\CodeGenerator",
+            "class": "ride\\library\\generator\\GenericCodeGenerator",
+            "id": "orm"
+        },
+        {
+            "interfaces": "ride\\library\\orm\\entry\\generator\\EntryGenerator",
+            "class": "ride\\library\\orm\\entry\\generator\\GenericEntryGenerator",
+            "id": "generic"
+        },
+        {
+            "interfaces": "ride\\library\\orm\\entry\\generator\\EntryGenerator",
+            "class": "ride\\library\\orm\\entry\\generator\\ModelEntryGenerator",
+            "id": "model"
+        },
+        {
+            "interfaces": "ride\\library\\orm\\entry\\generator\\EntryGenerator",
+            "class": "ride\\library\\orm\\entry\\generator\\ProxyEntryGenerator",
+            "id": "proxy"
         }
     ]
 }

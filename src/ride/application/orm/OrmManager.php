@@ -30,16 +30,16 @@ class OrmManager extends LibOrmManager {
 
     /**
      * Constructs a new ORM manager
-     * @param ride\library\reflection\ReflectionHelper $reflectionHelper
      * @param ride\library\database\DatabaseManager $databaseManager
      * @param ride\library\orm\loader\ModelLoader $modelLoader
      * @param ride\library\dependency\DependencyInjector $dependencyInjector
      * @return null
      */
-    public function __construct(ReflectionHelper $reflectionHelper, DatabaseManager $databaseManager, ModelLoader $modelLoader, ValidationFactory $validationFactory, DependencyInjector $dependencyInjector) {
-        parent::__construct($reflectionHelper, $databaseManager, $modelLoader, $validationFactory);
+    public function __construct(DatabaseManager $databaseManager, ModelLoader $modelLoader, ValidationFactory $validationFactory, DependencyInjector $dependencyInjector, $defaultNamespace) {
+        parent::__construct($dependencyInjector->getReflectionHelper(), $databaseManager, $modelLoader, $validationFactory);
 
         $this->dependencyInjector = $dependencyInjector;
+        $this->defaultNamespace = $defaultNamespace;
         $this->locales = null;
     }
 
@@ -70,16 +70,14 @@ class OrmManager extends LibOrmManager {
 
     /**
      * Gets the instance of the data formatter
-     * @return \ride\library\orm\DataFormatter
+     * @return \ride\library\orm\entry\format\EntryFormatter
      */
-    public function getDataFormatter() {
-        if (!$this->dataFormatter) {
-            $modifiers = $this->dependencyInjector->getAll('ride\\library\\orm\\model\\data\\format\\modifier\\DataFormatModifier');
-
-            $this->dataFormatter = new DataFormatter($this->reflectionHelper, $modifiers);
+    public function getEntryFormatter() {
+        if (!$this->entryFormatter) {
+            $this->entryFormatter = $this->dependencyInjector->get('ride\\library\\orm\\entry\\format\\EntryFormatter');
         }
 
-        return $this->dataFormatter;
+        return $this->entryFormatter;
     }
 
     /**
