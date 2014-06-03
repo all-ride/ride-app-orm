@@ -3,5 +3,6 @@
         "model": "%application%/data/cache/orm/model",
         "query": "%application%/data/cache/orm/query",
         "result": "%application%/data/cache/orm/result"
-    }
+    },
+    "orm.namespace.entry": "ride\\application\\orm\\entry"
 }

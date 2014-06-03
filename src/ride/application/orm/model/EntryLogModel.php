@@ -2,12 +2,12 @@
 
 namespace ride\application\orm\model;
 
-use ride\library\orm\model\LogModel as LibLogModel;
+use ride\library\orm\model\EntryLogModel as LibEntryLogModel;
 
 /**
  * Model for logging model actions
  */
-class LogModel extends LibLogModel {
+class EntryLogModel extends LibEntryLogModel {
 
     /**
      * Gets the name of the current user

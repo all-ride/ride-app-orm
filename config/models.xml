@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <models>
-	<model name="ModelLog" modelClass="ride\application\orm\model\LogModel" dataClass="ride\library\orm\model\data\LogData" group="ride.orm">
-        <field name="dataModel" type="string">
+	<model name="EntryLog" modelClass="ride\application\orm\model\EntryLogModel">
+        <field name="model" type="string">
             <validation name="required" />
         </field>
-        <field name="dataId" type="integer">
+        <field name="entry" type="string">
             <validation name="required" />
         </field>
-		<field name="dataVersion" type="integer" />
+		<field name="version" type="integer" />
 		<field name="action" type="string">
             <validation name="required" />
         </field>
-		<field name="changes" model="ModelLogChange" relation="hasMany" />
+		<field name="changes" model="EntryLogChange" relation="hasMany" />
 		<field name="user" type="string" />
-		<field name="dateAdded" type="datetime" />
-		
-		<format name="title">{dataModel} #{dataId}</format>
+
+		<format name="title">{model} #{entryId}</format>
 		<format name="teaser">{action} {user}</format>
-		
+
+        <option name="behaviour.date" value="true" />
         <option name="group" value="orm" />
 	</model>
-    
-	<model name="ModelLogChange" modelClass="ride\library\orm\model\LogChangeModel" dataClass="ride\library\orm\model\data\LogChangeData" group="ride.orm">
-        <field name="modelLog" model="ModelLog" relation="belongsTo">
+
+	<model name="EntryLogChange" modelClass="ride\library\orm\model\EntryLogChangeModel">
+        <field name="entryLog" model="EntryLog" relation="belongsTo">
             <validation name="required" />
         </field>
         <field name="fieldName" type="string">
@@ -30,7 +30,7 @@
         </field>
         <field name="oldValue" type="binary" />
 		<field name="newValue" type="binary" />
-		
+
         <option name="group" value="orm" />
-	</model>    
+	</model>
 </models>

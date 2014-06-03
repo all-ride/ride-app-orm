@@ -18,7 +18,7 @@ class OrmManager extends LibOrmManager {
 
     /**
      * Instance of Zibo
-     * @var ride\library\dependency\DependencyInjector
+     * @var \ride\library\dependency\DependencyInjector
      */
     protected $dependencyInjector;
 
@@ -30,22 +30,24 @@ class OrmManager extends LibOrmManager {
 
     /**
      * Constructs a new ORM manager
-     * @param ride\library\reflection\ReflectionHelper $reflectionHelper
-     * @param ride\library\database\DatabaseManager $databaseManager
-     * @param ride\library\orm\loader\ModelLoader $modelLoader
-     * @param ride\library\dependency\DependencyInjector $dependencyInjector
+     * @param \ride\library\database\DatabaseManager $databaseManager
+     * @param \ride\library\orm\loader\ModelLoader $modelLoader
+     * @param \ride\library\validation\factory\ValidationFactory $validationFactory
+     * @param \ride\library\dependency\DependencyInjector $dependencyInjector
+     * @param string $defaultNamespace
      * @return null
      */
-    public function __construct(ReflectionHelper $reflectionHelper, DatabaseManager $databaseManager, ModelLoader $modelLoader, ValidationFactory $validationFactory, DependencyInjector $dependencyInjector) {
-        parent::__construct($reflectionHelper, $databaseManager, $modelLoader, $validationFactory);
+    public function __construct(DatabaseManager $databaseManager, ModelLoader $modelLoader, ValidationFactory $validationFactory, DependencyInjector $dependencyInjector, $defaultNamespace) {
+        parent::__construct($dependencyInjector->getReflectionHelper(), $databaseManager, $modelLoader, $validationFactory);
 
         $this->dependencyInjector = $dependencyInjector;
+        $this->defaultNamespace = $defaultNamespace;
         $this->locales = null;
     }
 
     /**
      * Gets the dependency injector
-     * @return ride\library\dependency\DependencyInjector
+     * @return \ride\library\dependency\DependencyInjector
      */
     public function getDependencyInjector() {
         return $this->dependencyInjector;
@@ -53,7 +55,7 @@ class OrmManager extends LibOrmManager {
 
     /**
      * Sets the instance of the log
-     * @param ride\library\log\Log $log
+     * @param \ride\library\log\Log $log
      * @return null
      */
     public function setLog(Log $log) {
@@ -62,7 +64,7 @@ class OrmManager extends LibOrmManager {
 
     /**
      * Gets the instance of the log
-     * @return ride\library\log\Log|null
+     * @return \ride\library\log\Log|null
      */
     public function getLog() {
         return $this->log;
@@ -70,16 +72,14 @@ class OrmManager extends LibOrmManager {
 
     /**
      * Gets the instance of the data formatter
-     * @return \ride\library\orm\DataFormatter
+     * @return \ride\library\orm\entry\format\EntryFormatter
      */
-    public function getDataFormatter() {
-        if (!$this->dataFormatter) {
-            $modifiers = $this->dependencyInjector->getAll('ride\\library\\orm\\model\\data\\format\\modifier\\DataFormatModifier');
-
-            $this->dataFormatter = new DataFormatter($this->reflectionHelper, $modifiers);
+    public function getEntryFormatter() {
+        if (!$this->entryFormatter) {
+            $this->entryFormatter = $this->dependencyInjector->get('ride\\library\\orm\\entry\\format\\EntryFormatter');
         }
 
-        return $this->dataFormatter;
+        return $this->entryFormatter;
     }
 
     /**
