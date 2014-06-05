@@ -87,6 +87,14 @@ class XmlModelIO extends AbstractXmlModelIO {
     }
 
     /**
+     * Gets the instance of the geocode
+     * @return \ride\library\geocode\Geocoder
+     */
+    protected function getGeocoder() {
+        return $this->dependencyInjector->get('ride\\library\\geocode\\Geocoder');
+    }
+
+    /**
      * Creates an instance of a validator
      * @param string $name Name of the validator
      * @param array $options Options for the validator
