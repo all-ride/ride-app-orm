@@ -14,10 +14,12 @@
 		<field name="changes" model="EntryLogChange" relation="hasMany" />
 		<field name="user" type="string" />
 
-		<format name="title">{model} #{entryId}</format>
-		<format name="teaser">{action} {user}</format>
+		<format name="title">{model} #{entry}</format>
+		<format name="teaser">{dateAdded|date}: {action} {user}</format>
 
         <option name="behaviour.date" value="true" />
+        <option name="order.field" value="dateAdded" />
+        <option name="order.direction" value="DESC" />
         <option name="group" value="orm" />
 	</model>
 
