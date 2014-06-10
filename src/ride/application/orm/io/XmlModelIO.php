@@ -2,7 +2,11 @@
 
 namespace ride\application\orm\io;
 
+use ride\application\orm\model\behaviour\GeoBehaviour;
+
 use ride\library\dependency\DependencyInjector;
+use ride\library\orm\definition\field\PropertyField;
+use ride\library\orm\definition\ModelTable;
 use ride\library\orm\loader\io\AbstractXmlModelIO;
 use ride\library\reflection\ReflectionHelper;
 use ride\library\system\file\browser\FileBrowser;
@@ -87,11 +91,38 @@ class XmlModelIO extends AbstractXmlModelIO {
     }
 
     /**
-     * Gets the instance of the geocode
-     * @return \ride\library\geocode\Geocoder
+     * Gets the behaviours for the model from the table options, adds unset
+     * fields needed for the requested behaviours
+     * @param \ride\library\orm\definition\ModelTable $modelTable
+     * @return array Array with model behaviour instances
      */
-    protected function getGeocoder() {
-        return $this->dependencyInjector->get('ride\\library\\geocode\\Geocoder');
+    protected function getBehavioursFromModelTable(ModelTable $modelTable) {
+        $behaviours = parent::getBehavioursFromModelTable($modelTable);
+
+        if ($modelTable->getOption('behaviour.geo')) {
+            $behaviours[] = new GeoBehaviour('address');
+
+            if (!$modelTable->hasField('latitude')) {
+                $latitudeField = new PropertyField('latitude', 'float');
+                $latitudeField->setOptions(array(
+                    'label' => 'label.latitude',
+                    'scaffold.form.omit' => 'true',
+                ));
+
+                $modelTable->addField($latitudeField);
+            }
+            if (!$modelTable->hasField('longitude')) {
+                $longitudeField = new PropertyField('longitude', 'float');
+                $longitudeField->setOptions(array(
+                    'label' => 'label.longitude',
+                    'scaffold.form.omit' => 'true',
+                ));
+
+                $modelTable->addField($longitudeField);
+            }
+        }
+
+        return $behaviours;
     }
 
     /**
