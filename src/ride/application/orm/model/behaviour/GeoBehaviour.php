@@ -3,14 +3,14 @@
 namespace ride\application\orm\model\behaviour;
 
 use ride\library\orm\entry\GeoEntry;
-use ride\library\orm\model\behaviour\AbstractBehaviour;
+use ride\library\orm\model\behaviour\GeoBehaviour as LibGeoBehaviour;
 use ride\library\orm\model\Model;
 use ride\library\validation\exception\ValidationException;
 
 /**
  * Behaviour to resolve the coordinates of a location
  */
-class GeoBehaviour extends AbstractBehaviour {
+class GeoBehaviour extends LibGeoBehaviour {
 
     /**
      * Name of the service
