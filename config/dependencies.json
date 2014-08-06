@@ -222,6 +222,44 @@
             "id": "truncate"
         },
         {
+            "interfaces": "ride\\library\\orm\\entry\\format\\modifier\\EntryFormatModifier",
+            "class": "ride\\library\\orm\\entry\\format\\modifier\\FirstLastEntryFormatModifier",
+            "calls": [
+                {
+                    "method": "__construct",
+                    "arguments": [
+                        {
+                            "name": "isFirst",
+                            "type": "scalar",
+                            "properties": {
+                                "value": true
+                            }
+                        }
+                    ]
+                }
+            ],
+            "id": "first"
+        },
+        {
+            "interfaces": "ride\\library\\orm\\entry\\format\\modifier\\EntryFormatModifier",
+            "class": "ride\\library\\orm\\entry\\format\\modifier\\FirstLastEntryFormatModifier",
+            "calls": [
+                {
+                    "method": "__construct",
+                    "arguments": [
+                        {
+                            "name": "isFirst",
+                            "type": "scalar",
+                            "properties": {
+                                "value": false
+                            }
+                        }
+                    ]
+                }
+            ],
+            "id": "last"
+        },
+        {
             "interfaces": "ride\\library\\generator\\CodeGenerator",
             "class": "ride\\library\\generator\\GenericCodeGenerator",
             "id": "orm"
