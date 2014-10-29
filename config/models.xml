@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <models>
-	<model name="EntryLog" modelClass="ride\application\orm\model\EntryLogModel">
+	<model name="EntryLog" modelClass="ride\library\orm\model\EntryLogModel">
         <field name="model" type="string">
             <validation name="required" />
         </field>

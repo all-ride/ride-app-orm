@@ -3,11 +3,14 @@
 namespace ride\application\orm\io;
 
 use ride\application\orm\model\behaviour\GeoBehaviour;
+use ride\application\orm\model\behaviour\OwnerBehaviour;
 
 use ride\library\dependency\DependencyInjector;
+use ride\library\orm\definition\field\BelongsToField;
 use ride\library\orm\definition\field\PropertyField;
 use ride\library\orm\definition\ModelTable;
 use ride\library\orm\loader\io\AbstractXmlModelIO;
+use ride\library\reflection\Boolean;
 use ride\library\reflection\ReflectionHelper;
 use ride\library\system\file\browser\FileBrowser;
 
@@ -119,6 +122,28 @@ class XmlModelIO extends AbstractXmlModelIO {
                 ));
 
                 $modelTable->addField($longitudeField);
+            }
+        }
+
+        $useOwnerObject = $modelTable->getOption('behaviour.owner');
+        if ($useOwnerObject !== null) {
+            $useOwnerObject = Boolean::getBoolean($useOwnerObject);
+
+            $behaviours[] = new OwnerBehaviour($useOwnerObject);
+
+            if (!$modelTable->hasField('owner')) {
+                if ($useOwnerObject) {
+                    $ownerField = new BelongsToField('owner', 'User');
+                } else {
+                    $ownerField = new PropertyField('owner', 'string');
+                }
+
+                $ownerField->setOptions(array(
+                    'label' => 'label.owner',
+                    'scaffold.form.omit' => 'true',
+                ));
+
+                $modelTable->addField($ownerField);
             }
         }
 
