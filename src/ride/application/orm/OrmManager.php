@@ -108,4 +108,27 @@ class OrmManager extends LibOrmManager {
         return $i18n->getLocale()->getCode();
     }
 
+    /**
+     * Gets the current user
+     * @return \ride\library\security\model\User|null
+     */
+    public function getUser() {
+        $securityManager = $this->dependencyInjector->get('ride\\library\\security\\SecurityManager');
+
+        return $securityManager->getUser();
+    }
+
+    /**
+     * Gets the username of the current user
+     * @return string|null
+     */
+    public function getUserName() {
+        $user = $this->getUser();
+        if ($user) {
+            return $user->getUserName();
+        }
+
+        return null;
+    }
+
 }
