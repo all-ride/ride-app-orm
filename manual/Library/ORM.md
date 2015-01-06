@@ -180,7 +180,7 @@ To format your data, check this sample:
     $orm = $ride->getDependency('ride\\library\\orm\\OrmManager');
 
     $model = $orm->getModel('Blog');
-    $post = $model->findById(3);
+    $post = $model->getById(3);
     $format = $model->getMeta()->getDataFormat('title');
 
     $dataFormatter = $orm->getDataFormatter();
