@@ -33,7 +33,7 @@ The following property field types are available:
 
 #### Relation Fields
 
-Relation fields have no primitive type. 
+Relation fields have no primitive type.
 They are represented by another model.
 There are different types of relations.
 
@@ -59,7 +59,7 @@ The _hasMany_ relation is in most cases the other side of a _belongsTo_ relation
 
 In the blog-comment example, a blog post has many comments.
 Therefor a hasMany field with the comment model as related model could be added to the blog model.
-That way, you can query for a blog post with all it's comments. 
+That way, you can query for a blog post with all it's comments.
 
 ##### Has Many To Many
 
@@ -90,20 +90,20 @@ To hook your behaviour in your model, check the following example:
     use ride\library\orm\model\GenericModel;
 
     class RegistrationModel extends GenericModel {
-    
+
         protected function initialize() {
             $this->addBehaviour(new DatedBehaviour());
         }
-        
+
     }
-    
+
 #### Dated Behaviour
 
 The [ride\library\orm\model\behaviour\DatedBehaviour](/api/class/ride/library/orm/model/behaviour/DatedBehaviour) implementation will maintain the _dateAdded_ and _dateModified_ fields of your data with the time of the insert or update action.
 
 To use this behaviour, you have to:
 
-* define a _dateAdded_ and/or _dateModified_ property field with the _date_ or _datetime_ type in your model 
+* define a _dateAdded_ and/or _dateModified_ property field with the _date_ or _datetime_ type in your model
 * add the behaviour in your _initialize_ method of your model, see the [example](#behaviours)
 
 #### Log Behaviour
@@ -111,7 +111,7 @@ To use this behaviour, you have to:
 The [ride\library\orm\model\behaviour\LogBehaviour](/api/class/ride/library/orm/model/behaviour/LogBehaviour) implementation will keep a log of all insert, update and delete actions.
 
 You can query the history and obtain data in a certain version or from a certain date through the _ModelLog_ model.
-Check the [ride\library\orm\model\LogModel](/api/class/ride/library/orm/model/LogModel) API for the available methods.  
+Check the [ride\library\orm\model\LogModel](/api/class/ride/library/orm/model/LogModel) API for the available methods.
 
 This behaviour is automatically enabled if your model is set to be logged.
 
@@ -123,7 +123,7 @@ Slugs are human friendly ids for your data and are mostly used to generate user 
 
 To use this behaviour, you have to:
 
-* define a _slug_ property field with the _string_ type in your model 
+* define a _slug_ property field with the _string_ type in your model
 * add the behaviour in your _initialize_ method of your model, see the [example](#behaviours)
 
 #### Unique Behaviour
@@ -138,17 +138,17 @@ To use this behaviour, you have to add the behaviour in your _initialize_ method
     use ride\library\orm\model\GenericModel;
 
     class RegistrationModel extends GenericModel {
-    
+
         protected function initialize() {
             $behaviour = new UniqueBehaviour('email', array('type'));
             $behaviour->setValidationError('error.validation.registration.email.unique');
-            
+
             $this->addBehaviour($behaviour);
         }
-        
+
     }
-    
-In this example, the email addresses of registrations have to be unique for each type. 
+
+In this example, the email addresses of registrations have to be unique for each type.
 When the email address already exists for the type of the data, a [ride\library\validation\exception\ValidationException](/api/class/ride/library/validation/exception/ValidationException) is thrown with the _error.validation.registration.email.unique_ validation error for the _email_ field.
 
 #### Version Behaviour
@@ -166,13 +166,13 @@ Data formats provide a way to generalize your model data.
 
 The predefined and common used data formats are:
 
-* __title__  
+* __title__
 A title or name for your data
-* __teaser__  
+* __teaser__
 A teaser for your data
-* __image__  
+* __image__
 Path to the image of your data
-* __date__  
+* __date__
 A date for your data
 
 To format your data, check this sample:
@@ -180,7 +180,7 @@ To format your data, check this sample:
     $orm = $ride->getDependency('ride\\library\\orm\\OrmManager');
 
     $model = $orm->getModel('Blog');
-    $post = $model->findById(3);
+    $post = $model->getById(3);
     $format = $model->getMeta()->getDataFormat('title');
 
     $dataFormatter = $orm->getDataFormatter();
@@ -212,15 +212,15 @@ Example of a definition through models.xml for a blog:
             <field name="datePublished" type="datetime" />
             <field name="dateAdded" type="datetime" />
             <field name="comments" relation="hasMany" model="BlogComment" />
-            
+
             <format name="title">{title}</format>
             <format name="teaser">{teaser}</format>
             <format name="image">{image}</format>
             <format name="date">{datePublished}</format>
-            
+
             <option name="manager" value="1" />
         </model>
-    
+
         <model name="BlogComment">
             <field name="post" relation="belongsTo" model="Blog">
                 <validation name="required" />
@@ -230,7 +230,7 @@ Example of a definition through models.xml for a blog:
             </field>
             <field name="author" type="string" />
             <field name="dateAdded" type="datetime" />
-            
+
             <format name="title">{comment.title} - {author}</format>
             <format name="teaser">{comment|truncate}</format>
             <format name="date">{dateAdded}</format>
@@ -270,7 +270,7 @@ The following is a reference for _models.xml_ and the available elements.
     * __relation__: Type of the relation. (required for a relation property)
     * __linkModel__: Model name for the link model, defaults to a generated value of the 2 linked model names
     * __foreignKey__: Name for the foreign key in the related model, set this attribute when the related model has multiple relations back to this model.
-    * __dependant__: Boolean to state if the related data should be deleted when this record gets deleted, defaults to false 
+    * __dependant__: Boolean to state if the related data should be deleted when this record gets deleted, defaults to false
     * __relationOrder__: Order expression for the relation. (only for hasMany relations)
 * __value__: -
 * __parent__: model
@@ -328,20 +328,20 @@ The following is a reference for _models.xml_ and the available elements.
 
 ## Models
 
-Models contain the logic of your data model. 
+Models contain the logic of your data model.
 A generic ORM model contains methods which will allow you to create a CRUD.
 
 ### Add A Record
 
     $model = $orm->getModel('BlogPost');
-    
-    $post = $model->createData();
+
+    $post = $model->createEntry();
     $post->title = 'My First Post';
     $post->teaser = '<p>Welcome to the first post of my blog.</p>';
     $post->author = 'John';
-    
+
     $model->save($post);
-    
+
     // $post->id will contain the id of the new post
 
 ### Update A Record
@@ -349,25 +349,25 @@ A generic ORM model contains methods which will allow you to create a CRUD.
 To update a record, you simply change it's values and save it back to the model.
 
     $model = $orm->getModel('BlogPost');
-    
+
     $post = $model->getById(5);
     $post->teaser = '<p>Welcome to the first post of my great blog.</p>';
-    
+
     $model->save($post);
-    
+
 Since I'm only updating one field, I could have done:
 
     $model = $orm->getModel('BlogPost');
-    
+
     $post = $model->getById(5);
     $post->teaser = '<p>Welcome to the first post of my great blog.</p>';
 
     $model->save($post, 'teaser');
-    
+
 And again, since it's only one field, I could have done it without fetching the post first:
 
     $model = $orm->getModel('BlogPost');
-    
+
     $teaser = '<p>Welcome to the first post of my great blog.</p>';
 
     $model->save($teaser, 'teaser', 5);
@@ -377,21 +377,21 @@ And again, since it's only one field, I could have done it without fetching the 
 Deleting a record from the model is as easy as invoking the _delete_ method:
 
     $model = $orm->getModel('BlogPost');
-    
+
     $post = $model->getById(5);
-    
+
     $model->delete($post);
-    
+
 Or without fetching the post first:
 
     $model = $orm->getModel('BlogPost');
-    
+
     $model->delete(5);
 
 You can delete multiple posts at once:
 
     $model = $orm->getModel('BlogPost');
-    
+
     $model->delete(array(5, 7, 9));
 
 ### Query A Model
@@ -400,19 +400,19 @@ You first create a query:
 
     $orm = $ride->getDependency('ride\\library\\orm\\OrmManager');
 
-    // query the Registration model    
+    // query the Registration model
     $query = $orm->createQuery('Registration');
 
-    // query the Registration model and fetch 2 levels of relation properties    
+    // query the Registration model and fetch 2 levels of relation properties
     $query = $orm->createQuery('Registration', 2);
 
 You might need to select specific fields:
-    
+
     $query->setFields('{id}, {firstName}, {lastName}');
     $query->addField('{email}');
 
 Or add some conditions:
-    
+
     $query-addCondition('{id} = %1%', 1);
     $query-addCondition('{firstName} LIKE %1%', '%o%');
     $query-addCondition('{firstName} LIKE %1% OR {firstName} LIKE %2%', '%o%', 'J%');
