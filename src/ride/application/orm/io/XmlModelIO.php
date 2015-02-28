@@ -94,63 +94,6 @@ class XmlModelIO extends AbstractXmlModelIO {
     }
 
     /**
-     * Gets the behaviours for the model from the table options, adds unset
-     * fields needed for the requested behaviours
-     * @param \ride\library\orm\definition\ModelTable $modelTable
-     * @return array Array with model behaviour instances
-     */
-    protected function getBehavioursFromModelTable(ModelTable $modelTable) {
-        $behaviours = parent::getBehavioursFromModelTable($modelTable);
-
-        if ($modelTable->getOption('behaviour.geo')) {
-            $behaviours[] = new GeoBehaviour('address');
-
-            if (!$modelTable->hasField('latitude')) {
-                $latitudeField = new PropertyField('latitude', 'float');
-                $latitudeField->setOptions(array(
-                    'label' => 'label.latitude',
-                    'scaffold.form.omit' => 'true',
-                ));
-
-                $modelTable->addField($latitudeField);
-            }
-            if (!$modelTable->hasField('longitude')) {
-                $longitudeField = new PropertyField('longitude', 'float');
-                $longitudeField->setOptions(array(
-                    'label' => 'label.longitude',
-                    'scaffold.form.omit' => 'true',
-                ));
-
-                $modelTable->addField($longitudeField);
-            }
-        }
-
-        $useOwnerObject = $modelTable->getOption('behaviour.owner');
-        if ($useOwnerObject !== null) {
-            $useOwnerObject = Boolean::getBoolean($useOwnerObject);
-
-            $behaviours[] = new OwnerBehaviour($useOwnerObject);
-
-            if (!$modelTable->hasField('owner')) {
-                if ($useOwnerObject) {
-                    $ownerField = new BelongsToField('owner', 'User');
-                } else {
-                    $ownerField = new PropertyField('owner', 'string');
-                }
-
-                $ownerField->setOptions(array(
-                    'label' => 'label.owner',
-                    'scaffold.form.omit' => 'true',
-                ));
-
-                $modelTable->addField($ownerField);
-            }
-        }
-
-        return $behaviours;
-    }
-
-    /**
      * Creates an instance of a validator
      * @param string $name Name of the validator
      * @param array $options Options for the validator

@@ -117,6 +117,18 @@
                             }
                         }
                     ]
+                },
+                {
+                    "method": "setBehaviourInitializers",
+                    "arguments": [
+                        {
+                            "name": "behaviourInitializers",
+                            "type": "dependencies",
+                            "properties": {
+                                "interface": "ride\\library\\orm\\model\\behaviour\\initializer\\BehaviourInitializer"
+                            }
+                        }
+                    ]
                 }
             ]
         },
@@ -171,6 +183,36 @@
                     ]
                 }
             ]
+        },
+        {
+            "interfaces": "ride\\library\\orm\\model\\behaviour\\initializer\\BehaviourInitializer",
+            "class": "ride\\library\\orm\\model\\behaviour\\initializer\\UniqueBehaviourInitializer",
+            "id": "unique"
+        },
+        {
+            "interfaces": "ride\\library\\orm\\model\\behaviour\\initializer\\BehaviourInitializer",
+            "class": "ride\\library\\orm\\model\\behaviour\\initializer\\DateBehaviourInitializer",
+            "id": "date"
+        },
+        {
+            "interfaces": "ride\\library\\orm\\model\\behaviour\\initializer\\BehaviourInitializer",
+            "class": "ride\\library\\orm\\model\\behaviour\\initializer\\LogBehaviourInitializer",
+            "id": "log"
+        },
+        {
+            "interfaces": "ride\\library\\orm\\model\\behaviour\\initializer\\BehaviourInitializer",
+            "class": "ride\\library\\orm\\model\\behaviour\\initializer\\OwnerBehaviourInitializer",
+            "id": "owner"
+        },
+        {
+            "interfaces": "ride\\library\\orm\\model\\behaviour\\initializer\\BehaviourInitializer",
+            "class": "ride\\library\\orm\\model\\behaviour\\initializer\\SlugBehaviourInitializer",
+            "id": "slug"
+        },
+        {
+            "interfaces": "ride\\library\\orm\\model\\behaviour\\initializer\\BehaviourInitializer",
+            "class": "ride\\library\\orm\\model\\behaviour\\initializer\\VersionBehaviourInitializer",
+            "id": "version"
         },
         {
             "interfaces": "ride\\library\\orm\\entry\\format\\EntryFormatter",
@@ -267,7 +309,21 @@
         {
             "interfaces": "ride\\library\\orm\\entry\\generator\\EntryGenerator",
             "class": "ride\\library\\orm\\entry\\generator\\GenericEntryGenerator",
-            "id": "generic"
+            "id": "generic",
+            "calls": [
+                {
+                    "method": "setBehaviourInitializers",
+                    "arguments": [
+                        {
+                            "name": "behaviourInitializers",
+                            "type": "dependencies",
+                            "properties": {
+                                "interface": "ride\\library\\orm\\model\\behaviour\\initializer\\BehaviourInitializer"
+                            }
+                        }
+                    ]
+                }
+            ]
         },
         {
             "interfaces": "ride\\library\\orm\\entry\\generator\\EntryGenerator",
