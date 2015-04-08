@@ -254,6 +254,7 @@ The following is a reference for _models.xml_ and the available elements.
     * __name__: Name of the model (required)
     * __modelClass__: Full class name for your model, defaults to [ride\library\orm\model\GenericModel](/api/class/ride/library/orm/model/GenericModel)
     * __dataClass__: Full class name for your data, defaults to [ride\library\orm\model\data\Data](/api/class/ride/library/orm/model/data/Data)
+    * __willBlockDeleteWhenUsed__: Boolean to state if entries from this model can only be deleted when they are not referenced in other models. 
 * __value__: -
 * __parent__: models
 * __children__: field, index, format, option
