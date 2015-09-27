@@ -1,7 +1,7 @@
 {
     "name": "ride/app-orm",
     "description": "ORM integration for a Ride application.",
-    "version": "0.3.3",
+    "version": "0.4.0",
     "authors": [
         {
             "name": "Joris Vandeweerd",
@@ -9,7 +9,7 @@
         }
     ],
     "require": {
-        "ride/app": ">=0.4.0",
+        "ride/app": ">=0.7.0",
         "ride/app-database": ">=0.1.0",
         "ride/app-validation": ">=0.1.0",
         "ride/lib-database": ">=0.1.0",
