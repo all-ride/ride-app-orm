@@ -9,7 +9,7 @@
         }
     ],
     "require": {
-        "ride/app": ">=0.4.0",
+        "ride/app": ">=0.7.0",
         "ride/app-database": ">=0.1.0",
         "ride/app-validation": ">=0.1.0",
         "ride/lib-database": ">=0.1.0",
