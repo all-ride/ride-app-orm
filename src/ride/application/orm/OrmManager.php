@@ -23,6 +23,12 @@ class OrmManager extends LibOrmManager {
     protected $dependencyInjector;
 
     /**
+     * Default locale
+     * @var string
+     */
+    protected $locale;
+
+    /**
      * Array with the available locales, the locale code as key
      * @var array
      */
@@ -42,6 +48,7 @@ class OrmManager extends LibOrmManager {
 
         $this->dependencyInjector = $dependencyInjector;
         $this->defaultNamespace = $defaultNamespace;
+        $this->locale = null;
         $this->locales = null;
     }
 
@@ -103,9 +110,22 @@ class OrmManager extends LibOrmManager {
      * @return string Code of the locale
      */
     public function getLocale() {
+        if ($this->locale) {
+            return $this->locale;
+        }
+
         $i18n = $this->dependencyInjector->get('ride\\library\\i18n\\I18n');
 
         return $i18n->getLocale()->getCode();
+    }
+
+    /**
+     * Sets the default locale for the ORM
+     * @param string $locale Code of the locale
+     * @return null
+     */
+    public function setLocale($locale) {
+        $this->locale = $locale;
     }
 
     /**
