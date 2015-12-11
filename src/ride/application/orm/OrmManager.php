@@ -91,18 +91,42 @@ class OrmManager extends LibOrmManager {
 
     /**
      * Gets an array with the available locales
+     * @param string $locale Locale to get the relative locales prioritied
      * @return array Array with the locale code as key
      */
-    public function getLocales() {
-        if ($this->locales !== null) {
-            return $this->locales;
+    public function getLocales($locale = null) {
+        if ($this->locales === null) {
+            $this->fetchLocales();
         }
 
+        if ($locale === null) {
+            $locale = $this->getLocale();
+        }
+
+        if (strpos($locale, '_')) {
+            $language = substr($locale, 0, 2);
+        } else {
+            $language = $locale;
+        }
+
+        $preferred = array();
+        $locales = array();
+
+        foreach ($this->locales as $locale) {
+            if (substr($locale, 0, 2) === $language) {
+                $preferred[$locale] = $locale;
+            } else {
+                $locales[$locale] = $locale;
+            }
+        }
+
+        return $preferred + array($language => $language) + $locales;
+    }
+
+    private function fetchLocales() {
         $i18n = $this->dependencyInjector->get('ride\\library\\i18n\\I18n');
 
         $this->locales = $i18n->getLocaleCodeList();
-
-        return $this->locales;
     }
 
     /**
