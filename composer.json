@@ -1,7 +1,7 @@
 {
     "name": "ride/app-orm",
     "description": "ORM integration for a Ride application.",
-    "version": "0.5.1",
+    "version": "0.6.0",
     "authors": [
         {
             "name": "Joris Vandeweerd",
@@ -24,7 +24,8 @@
     "autoload": {
         "psr-0": {
             "ride\\application\\cache\\control\\": ["src/"],
-            "ride\\application\\orm\\": ["src/"]
+            "ride\\application\\orm\\": ["src/"],
+            "ride\\service\\OrmService": ["src/"]
         }
     }
 }
