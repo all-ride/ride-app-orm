@@ -65,8 +65,8 @@ class OrmService {
 
             $variables = array();
 
-            $reflectionHelper = $this->model->getReflectionHelper();
-            $meta = $this->model->getMeta();
+            $reflectionHelper = $model->getReflectionHelper();
+            $meta = $model->getMeta();
             $properties = $meta->getProperties();
             $belongsTo = $meta->getBelongsTo();
 
