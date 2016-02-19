@@ -122,7 +122,7 @@ class OrmService {
         } else {
             $optionMethod = $field->getOption('scaffold.form.options.method');
             if ($optionMethod) {
-                $inputOptions = $this->model->$optionMethod($translator);
+                $inputOptions = $model->$optionMethod($translator);
             } else {
                 $inputOptions = $field->getOption('scaffold.form.options.json');
                 if ($inputOptions) {
