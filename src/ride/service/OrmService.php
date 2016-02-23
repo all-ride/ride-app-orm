@@ -93,7 +93,11 @@ class OrmService {
         // apply vocabulary on taxonomy terms
         $vocabulary = $field->getOption('taxonomy.vocabulary');
         if ($vocabulary && $relationModel->getName() == 'TaxonomyTerm') {
-            $query->addCondition('{vocabulary.slug} = %1%', $vocabulary);
+            if (is_numeric($vocabulary)) {
+                $query->addCondition('{vocabulary.id} = %1%', $vocabulary);
+            } else {
+                $query->addCondition('{vocabulary.slug} = %1%', $vocabulary);
+            }
         }
 
         // apply the order
