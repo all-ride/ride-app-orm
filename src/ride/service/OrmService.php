@@ -97,9 +97,14 @@ class OrmService {
         }
 
         // apply the order
-        $orderField = $relationMeta->getOption('order.field');
-        if ($orderField) {
-            $query->addOrderBy('{' . $orderField . '} ' . $relationMeta->getOption('order.direction', 'ASC'));
+        $order = $field->getOption('scaffold.form.order');
+        if ($order) {
+            $query->addOrderBy($order);
+        } else {
+            $orderField = $relationMeta->getOption('order.field');
+            if ($orderField) {
+                $query->addOrderBy('{' . $orderField . '} ' . $relationMeta->getOption('order.direction', 'ASC'));
+            }
         }
 
         // return the result
