@@ -206,6 +206,11 @@
         },
         {
             "interfaces": "ride\\library\\orm\\model\\behaviour\\initializer\\BehaviourInitializer",
+            "class": "ride\\library\\orm\\model\\behaviour\\initializer\\PublicationBehaviourInitializer",
+            "id": "publication"
+        },
+        {
+            "interfaces": "ride\\library\\orm\\model\\behaviour\\initializer\\BehaviourInitializer",
             "class": "ride\\library\\orm\\model\\behaviour\\initializer\\SlugBehaviourInitializer",
             "id": "slug"
         },
@@ -247,6 +252,11 @@
             "interfaces": "ride\\library\\orm\\entry\\format\\modifier\\EntryFormatModifier",
             "class": "ride\\library\\orm\\entry\\format\\modifier\\HtmlEntitiesEntryFormatModifier",
             "id": "htmlentities"
+        },
+        {
+            "interfaces": "ride\\library\\orm\\entry\\format\\modifier\\EntryFormatModifier",
+            "class": "ride\\library\\orm\\entry\\format\\modifier\\TimeEntryFormatModifier",
+            "id": "time"
         },
         {
             "interfaces": "ride\\library\\orm\\entry\\format\\modifier\\EntryFormatModifier",
