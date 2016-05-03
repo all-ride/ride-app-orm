@@ -10,6 +10,8 @@ use ride\library\reflection\Boolean;
 use ride\library\reflection\ReflectionHelper;
 use ride\library\system\file\browser\FileBrowser;
 
+use \Exception;
+
 /**
  * Application listener for the ORM
  */
@@ -37,6 +39,115 @@ class ApplicationListener {
             GenericModel::EVENT_DELETE_POST,
         );
         $this->values = array();
+    }
+
+    /**
+     * Deletes all files in the entry log for models with the files.delete
+     * option enabled
+     * @param \ride\library\orm\OrmManager $orm
+     * @param boolean $isDryRun
+     * @return array Array with the path of the file as key and a boolean value
+     * to determine whether the file is deleted
+     */
+    public function deleteOldFiles(OrmManager $orm, $isDryRun = false) {
+        $fileValues = array();
+        $fileProperties = array();
+
+        $logChangeModel = $orm->getEntryLogChangeModel();
+        $models = $orm->getModels();
+
+        // retrieve all history values
+        foreach ($models as $modelName => $model) {
+            $meta = $model->getMeta();
+
+            $isLogged = $meta->getOption('behaviour.log') ? true : false;
+            $fileProperties[$modelName] = $this->isFileDeletionEnabled($meta, $this->getFileProperties($meta));
+
+            if (!$isLogged || !$fileProperties[$modelName]) {
+                $fileProperties[$modelName] = null;
+
+                continue;
+            }
+
+            $page = 1;
+            $limit = 1000;
+
+            do {
+                $query = $logChangeModel->createQuery();
+                $query->addJoin('INNER', 'EntryLog', 'el', '{entryLog} = {el.id}');
+                $query->addCondition('{el.model} = %1% AND {fieldName} IN %2%', $model->getName(), array_keys($fileProperties[$modelName]));
+                $query->setLimit($limit, ($page - 1) * $limit);
+
+                $logChanges = $query->query();
+                foreach ($logChanges as $logChange) {
+                    $oldValue = $logChange->getOldValue();
+                    $newValue = $logChange->getNewValue();
+
+                    if ($oldValue) {
+                        $fileValues[$oldValue] = $oldValue;
+                    }
+                    if ($newValue) {
+                        $fileValues[$newValue] = $newValue;
+                    }
+                }
+
+                $page++;
+            } while ($logChanges);
+        }
+
+        // remove current values
+        foreach ($models as $modelName => $model) {
+            if (!$fileProperties[$modelName]) {
+                continue;
+            }
+
+            $reflectionHelper = $model->getReflectionHelper();
+            $page = 1;
+            $limit = 1000;
+
+            do {
+                $query = $model->createQuery(null);
+                $query->setFetchUnlocalized(true);
+                $query->setLimit($limit, ($page - 1) * $limit);
+
+                $entries = $query->query();
+                foreach ($entries as $entry) {
+                    foreach ($fileProperties[$modelName] as $filePropertyName => $fileProperty) {
+                        $currentValue = $reflectionHelper->getProperty($entry, $filePropertyName);
+                        if (!$currentValue || !isset($fileValues[$currentValue])) {
+                            continue;
+                        }
+
+                        unset($fileValues[$currentValue]);
+                    }
+                }
+
+                $page++;
+            } while ($entries);
+        }
+
+        // delete all remaining values
+        foreach ($fileValues as $fileValue => $file) {
+            $file = $this->fileBrowser->getFile($fileValue);
+            if ($file) {
+                $status = false;
+
+                if (!$isDryRun) {
+                    try {
+                        $file->delete();
+                        $status = true;
+                    } catch (Exception $exception) {
+
+                    }
+                }
+
+                $fileValues[$fileValue] = $status;
+            } else {
+                unset($fileValues[$fileValue]);
+            }
+        }
+
+        return $fileValues;
     }
 
     /**
@@ -169,7 +280,7 @@ class ApplicationListener {
         }
 
         // determine default value
-        $default = $meta->getOption('behaviour.log') ? true : false;
+        $default = $meta->getOption('behaviour.log') ? false : true;
         $default = $this->checkFileDeletionOption($meta->getOption(self::OPTION_FILES_DELETE), $default);
 
         // check individual properties and remove property from list if file
@@ -213,6 +324,10 @@ class ApplicationListener {
             if ($type == 'file' || $type == 'image') {
                 $fileProperties[$propertyName] = $property;
             }
+        }
+
+        if ($meta->getName() == 'Asset') {
+            $fileProperties['value'] = $properties['value'];
         }
 
         return $fileProperties;
