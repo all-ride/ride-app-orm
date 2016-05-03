@@ -1,0 +1,20 @@
+{
+    "orm.update.pre": [
+        {
+            "interface": "ride\\application\\orm\\ApplicationListener",
+            "method": "handleObsoleteFiles"
+        }
+    ],
+    "orm.update.post": [
+        {
+            "interface": "ride\\application\\orm\\ApplicationListener",
+            "method": "handleObsoleteFiles"
+        }
+    ],
+    "orm.delete.post": [
+        {
+            "interface": "ride\\application\\orm\\ApplicationListener",
+            "method": "handleObsoleteFiles"
+        }
+    ]
+}
