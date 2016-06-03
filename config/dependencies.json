@@ -206,11 +206,6 @@
         },
         {
             "interfaces": "ride\\library\\orm\\model\\behaviour\\initializer\\BehaviourInitializer",
-            "class": "ride\\library\\orm\\model\\behaviour\\initializer\\PublicationBehaviourInitializer",
-            "id": "publication"
-        },
-        {
-            "interfaces": "ride\\library\\orm\\model\\behaviour\\initializer\\BehaviourInitializer",
             "class": "ride\\library\\orm\\model\\behaviour\\initializer\\SlugBehaviourInitializer",
             "id": "slug"
         },
