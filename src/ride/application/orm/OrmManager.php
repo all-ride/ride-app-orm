@@ -11,6 +11,8 @@ use ride\library\orm\OrmManager as LibOrmManager;
 use ride\library\reflection\ReflectionHelper;
 use ride\library\validation\factory\ValidationFactory;
 
+use \Exception;
+
 /**
  * Ride integration for the ORM manager
  */
@@ -157,9 +159,15 @@ class OrmManager extends LibOrmManager {
      * @return \ride\library\security\model\User|null
      */
     public function getUser() {
-        $securityManager = $this->dependencyInjector->get('ride\\library\\security\\SecurityManager');
+        try {
+            $securityManager = $this->dependencyInjector->get('ride\\library\\security\\SecurityManager');
 
-        return $securityManager->getUser();
+            $user = $securityManager->getUser();
+        } catch (Exception $exception) {
+            $user = null;
+        }
+
+        return $user;
     }
 
     /**
