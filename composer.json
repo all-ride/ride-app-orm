@@ -16,7 +16,7 @@
         "ride/lib-dependency": "^1.0.0",
         "ride/lib-i18n": "^1.0.0",
         "ride/lib-log": "^1.0.0",
-        "ride/lib-orm": "^1.0.0",
+        "ride/lib-orm": "^1.6.0",
         "ride/lib-reflection": "^1.0.0",
         "ride/lib-security": "^1.0.0",
         "ride/lib-system": "^1.0.0"

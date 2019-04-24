@@ -245,6 +245,11 @@
         },
         {
             "interfaces": "ride\\library\\orm\\entry\\format\\modifier\\EntryFormatModifier",
+            "class": "ride\\library\\orm\\entry\\format\\modifier\\EscapeEntryFormatModifier",
+            "id": "escape"
+        },
+        {
+            "interfaces": "ride\\library\\orm\\entry\\format\\modifier\\EntryFormatModifier",
             "class": "ride\\library\\orm\\entry\\format\\modifier\\HtmlEntitiesEntryFormatModifier",
             "id": "htmlentities"
         },
