@@ -23,6 +23,14 @@ class ApplicationListener {
      */
     const OPTION_FILES_DELETE = 'files.delete';
 
+    protected ReflectionHelper $reflectionHelper;
+
+    protected FileBrowser $fileBrowser;
+
+    protected array $eventNames;
+
+    protected array $values;
+
     /**
      * Constructs a new ORM application listener
      * @param \ride\library\reflection\ReflectionHelper $reflectionHelper

@@ -43,6 +43,7 @@ class XmlModelIO extends AbstractXmlModelIO {
      * @var \ride\library\validation\factory\ValidationFactory
      */
     private $validationFactory;
+    private $defaultNamespace;
 
     /**
      * Constructs a new model IO

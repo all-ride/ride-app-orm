@@ -1,3 +1,6 @@
+## [1.2.0] - 2024-06-26
+### Updated
+- Updated to be compatible with ph 8.3
 ## [1.1.0] - 2019-04-24
 ### Added
 - added escape entry formatter
